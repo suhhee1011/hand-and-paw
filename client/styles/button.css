@@ -1,0 +1,27 @@
+@import url("./variable.css");
+
+.btn{
+    grid-column-start: 1;
+    grid-row-start: 3;
+    padding: 10px 20px 10px 20px;
+    font-weight: 700;
+    font-size: 14px;
+    
+    height: 60px;
+    width: 200px;
+    left: 419px;
+    top: 75px;
+    border-radius: 60px;
+    border: 0;
+    text-decoration: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+    .call-to-action1{
+        background-color: var(--main1);
+        color: #371742;
+       
+    }
+    .call-to-action2{
+        background-color: var(--main2);
+        color: #FFF8DC;
+    }
