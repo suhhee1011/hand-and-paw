@@ -3,3 +3,19 @@
 @import url("./button.css");
 @import url("./article.css");
 
+html
+
+.welcome-image{
+    position: relative; left: 0; top: 0;
+}
+.welcome-image-bg{
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.welcome-image-dog{
+    position: absolute;
+    top: 140px;
+    left: 120px;
+}
+
