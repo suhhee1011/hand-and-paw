@@ -11,35 +11,64 @@
 @import url("./animal-profile.css");
 
 /* top article + navbar section */
-.welcome-container {
-  justify-content: center;
-  padding: 0 10rem;
-  grid-template-areas:
-    "welcome-image-dog welcome-article"
-    "space call-to-action";
+
+.header-navbar-wrapper {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 300px 1fr 1fr 1fr;
+  background-color: darkorange;
 }
-.welcome-container .call-to-action {
+
+#top {
+  background-color: brown;
+  grid-row-start: 1;
+  grid-row-end: end;
+  grid-column-start: 1;
+  grid-column-end: end;
+}
+
+/* .welcome-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 300px 1fr 1fr 1fr;
+  background-color: cyan;
+} */
+
+.welcome-image-dog {
+  grid-column-start: 2;
+  grid-column-end: end;
+}
+
+.welcome-shift {
+  grid-row-start: 2;
+  grid-row-end: end;
+  grid-column-start: 3;
+  grid-column-end: end;
+}
+
+.welcome {
+  grid-row-start: 1;
+  grid-row-end: end;
+  grid-column-start: 1;
+  grid-column-end: end;
+}
+
+/* .welcome-container .call-to-action {
   width: 70%;
   margin-top: 1.5rem;
   display: flex;
   justify-content: space-between;
-}
+} */
 
 navbar {
   background-color: transparent !important;
-}
-
-.header-navbar-wrapper {
-  /* The image used */
-  background-image: url("../assets/images/ui/home/figma-images/welcome-bg.png");
-  min-height: 600px;
-  /* Center and scale the image */
-  background-position: left top;
-  background-repeat: no-repeat;
-  background-size: 600px;
-  /* position the navbar */
-  position: relative;
-  margin-bottom: 3rem;
 }
 
 hr {
