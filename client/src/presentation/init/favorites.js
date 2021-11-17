@@ -4,15 +4,18 @@ import footer from "../components/layout/footer.js";
 import getFavoritesAnimals from "../../business-logic/get-favorites-animals.js";
 import deleteAnimalBtn from "../components/layout/delete-animal-button.js";
 import removeFavoriteHandler from "../handlers/remove-favorite.js";
+import { burgerHandler } from "../handlers/burger-handler.js";
 
 const buildPage = async () => {
   const message = 'You have no animals added into "Favorites", yet.';
-  document.getElementById("menu").appendChild(navbar());
+  document.getElementById("menu").appendChild(await navbar());
   document.querySelector("footer").appendChild(footer());
   const addedAnimals = await getFavoritesAnimals();
   const animalSortResults = document.querySelector(".favorites-sort-results");
 
-  animalSortResults.appendChild(animalSearchResults(addedAnimals, message));
+  animalSortResults.appendChild(
+    await animalSearchResults(addedAnimals, message)
+  );
 
   const cardPhotos = document.querySelectorAll(".card-photo");
 
@@ -24,6 +27,7 @@ const buildPage = async () => {
     menu.appendChild(deleteAnimalBtn(removeFavoriteHandler));
     card.appendChild(menu);
   });
+  burgerHandler();
 };
 
 buildPage();

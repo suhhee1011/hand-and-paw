@@ -28,6 +28,24 @@ const checkEmail = (input) => {
   return false;
 };
 
+const checkPhoneNumber = (input) => {
+  const re = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im;
+  if (re.test(input.value.trim())) {
+    showSuccess(input);
+    return true;
+  }
+  showError(input, "Phone is not valid example: +32123456789");
+  return false;
+};
+
+const checkUrl = (string) => {
+  try {
+    return Boolean(new URL(string));
+  } catch (e) {
+    return false;
+  }
+};
+
 // check required fields
 
 const checkRequired = (inputArr) => {
@@ -46,19 +64,14 @@ const checkRequired = (inputArr) => {
 // check input length
 const checkLength = (input, min, max) => {
   if (input.value.length < min) {
-    showError(
-      input,
-      `${getFieldName(input)} must be at least ${min} characters`
-    );
+    showError(input, `${input.name} must be at least ${min} characters`);
     return false;
   }
   if (input.value.length > max) {
-    showError(
-      input,
-      `${getFieldName(input)} must be less then ${max} characters`
-    );
+    showError(input, `${input.name} must be less then ${max} characters`);
     return false;
   }
+  showSuccess(input);
   return true;
 };
 
@@ -91,4 +104,6 @@ export {
   checkRequired,
   showError,
   checkEmailMatch,
+  checkPhoneNumber,
+  checkUrl,
 };

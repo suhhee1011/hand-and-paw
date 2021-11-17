@@ -1,26 +1,48 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-use-before-define */
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
 import { updateUser } from "../../data-access/user-access/update-user.js";
+import { getUser } from "../../data-access/user-access/get-user.js";
+import { addValuesToEditUser } from "../../business-logic/add-values-to-edit-user.js";
+import { validateForm } from "../../business-logic/regular-form-input-validation.js";
 
 export const updateUserHandler = async () => {
   const form = document.querySelector("#edit-user-profile");
-  const formData = new FormData(form);
-  const userId = window.localStorage.getItem("userId");
-  formData.append("id", window.localStorage.getItem("userId"));
 
-  const post = await updateUser(userId, formData);
-  if (post[0]?._id) {
-    const publicAccess = document.getElementById("public-access");
-    if (publicAccess) {
-      publicAccess.remove();
+  const name = getInput("name-input", "name-small-edit-profile-form");
+  const phone = getInput("phone-input", "phone-small-edit-profile-form");
+  const website = getInput("website-input", "website-small-edit-profile-form");
+
+  const isValidated = validateForm(name, phone, website);
+
+  if (isValidated) {
+    const formData = new FormData(form);
+    const userId = window.localStorage.getItem("userId");
+    formData.append("id", window.localStorage.getItem("userId"));
+
+    const post = await updateUser(userId, formData);
+    if (post[0]?._id) {
+      const publicAccess = document.getElementById("public-access");
+      if (publicAccess) {
+        publicAccess.remove();
+      }
+      renderSuccessfullySpan();
+      setTimeout(clearSuccessfullySpan, 1000);
+      form.reset();
+      // remove input errors
+      removeError(name);
+      removeError(phone);
+      removeError(website);
+      const user = await getUser(userId);
+      setTimeout(() => addValuesToEditUser(user[0]), 1001);
+      return;
     }
-    renderSuccessfullySpan();
-    setTimeout(clearSuccessfullySpan, 1000);
-    form.reset();
-    return;
+    renderFailedSpan(post);
+    setTimeout(clearFailedSpan, 1000);
   }
-  renderFailedSpan();
-  setTimeout(clearFailedSpan, 1000);
 };
-
+/// /////// helper functions //////////////////////
 function renderSuccessfullySpan() {
   const form = document.querySelector("#edit-user-profile");
   const isSpan = document.getElementById("update-account-result-text");
@@ -41,7 +63,7 @@ function renderSuccessfullySpan() {
   form.appendChild(span);
 }
 
-function renderFailedSpan() {
+function renderFailedSpan(post) {
   const form = document.querySelector("#edit-user-profile");
   const span = document.createElement("span");
   const br = document.createElement("br");
@@ -71,4 +93,17 @@ function clearFailedSpan() {
     isSpan.remove();
     brEl.remove();
   }
+}
+
+function getInput(inputId, smallId) {
+  const object = {};
+  object.formInput = document.getElementById(inputId);
+  object.formMessage = document.getElementById(smallId);
+
+  return object;
+}
+
+function removeError(inputObj) {
+  inputObj.formMessage.innerHTML = "";
+  inputObj.formInput.style.borderColor = "black";
 }

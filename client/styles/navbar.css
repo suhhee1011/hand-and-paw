@@ -2,8 +2,9 @@
 
 #menu a,
 button {
-  all: unset;
-  cursor: pointer;
+ color: black;
+ text-decoration: none;
+ cursor: pointer;
 }
 
 navbar {
@@ -31,6 +32,14 @@ navbar {
   z-index: 100;
 }
 
+#avatar-image {
+  height: 75px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 50%;
+  padding-left: 10px;
+}
+
 #top-navbar .pages-menu {
   grid-area: menu;
   display: flex;
@@ -38,7 +47,6 @@ navbar {
 }
 
 #top-navbar .account-menu {
-  all: unset;
   grid-area: account;
   display: flex;
   justify-content: flex-end;
@@ -77,10 +85,15 @@ navbar {
   display: none;
   width: 40px;
   height: 28px;
-  margin-right: 15px;
   margin-bottom: 25px;
+  margin-top: 20px;
+  margin-left: auto;
   position: relative;
   cursor: pointer;
+}
+
+.responsive-menu {
+  display: none;
 }
 
 .burger_line {
@@ -106,12 +119,32 @@ navbar {
 }
 
 /* Media start */
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 1325px) {
   .header_burger {
     display: block;
+    grid-area: account;
   }
 
-  .pages-menu {
+  #top-navbar .pages-menu {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
+    z-index: 10;
+    padding: 1.6rem;
+    transform: translateX(100%);
+    transition: 0.2s all linear;
+    z-index: 100;
+  }
+
+  #top-navbar .account-menu {
+    display: none;
+  }
+
+  .responsive-menu {
+    display: block;
     width: 100%;
     height: 100%;
     position: fixed;
@@ -123,19 +156,17 @@ navbar {
     transform: translateX(100%);
     transition: 0.2s all linear;
   }
-  .pages-menu_active {
-    transform: translateX(0);
-  }
-  a {
+
+  .responsive-menu_item {
     width: 100%;
     margin-right: 0;
     margin-bottom: 30px;
   }
-  a:last-child {
-    margin-bottom: 0;
-  }
 
-  .pages-menu-close {
+  .responsive-menu_active {
+    transform: translateX(0);
+  }
+  .responsive-menu-close {
     width: 40px;
     height: 40px;
     position: absolute;
@@ -158,6 +189,22 @@ navbar {
   }
   .pages-menu-close-line:last-child {
     transform: translateY(-50%) rotate(-45deg);
+  }
+
+  a {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
+  a:last-child {
+    margin-bottom: 0;
+  }
+
+  .header_link {
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 48px;
+      cursor: pointer;
   }
 }
 

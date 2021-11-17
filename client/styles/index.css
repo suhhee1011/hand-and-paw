@@ -7,65 +7,28 @@
 @import url("./modal.css");
 @import url("./form.css");
 @import url("./link-button.css");
-@import url("./about-adoption.css");
+/* @import url("./about-adoption.css"); */
 @import url("./animal-profile.css");
 
 /* top article + navbar section */
-
 .header-navbar-wrapper {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 300px 1fr 1fr 1fr;
-  background-color: darkorange;
+  background-image: url("../assets/images/ui/home/figma-images/welcome-bg.svg");
+  background-position: left top;
+  background-repeat: no-repeat;
+  background-size: 600px;
+  /* position the navbar */
+  position: relative;
+  margin-bottom: 3rem;
 }
 
-#top {
-  background-color: brown;
-  grid-row-start: 1;
-  grid-row-end: end;
-  grid-column-start: 1;
-  grid-column-end: end;
+.welcome-container {
+  justify-content: center;
+  /* padding: 0 10rem; */
+  grid-template-areas:
+    "welcome-image welcome-article"
+    "space call-to-action";
+  gap: 32px;
 }
-
-/* .welcome-container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 300px 1fr 1fr 1fr;
-  background-color: cyan;
-} */
-
-.welcome-image-dog {
-  grid-column-start: 2;
-  grid-column-end: end;
-}
-
-.welcome-shift {
-  grid-row-start: 2;
-  grid-row-end: end;
-  grid-column-start: 3;
-  grid-column-end: end;
-}
-
-.welcome {
-  grid-row-start: 1;
-  grid-row-end: end;
-  grid-column-start: 1;
-  grid-column-end: end;
-}
-
-/* .welcome-container .call-to-action {
-  width: 70%;
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-} */
 
 navbar {
   background-color: transparent !important;
@@ -75,30 +38,39 @@ hr {
   margin-top: 15px;
   border: 2px solid var(--primary2);
 }
-/* 
-.welcome-article {
-  background-color: cadetblue;
-  display: grid;
-  grid-template-rows: auto;
-} */
+
 .welcome-image {
   display: flex;
   align-content: flex-start;
   justify-content: flex-start;
-  position: relative;
+  grid-area: welcome-image;
+  /* position: relative;
   top: 0;
-  left: 0;
+  left: 0; */
 }
+
 .welcome-image-dog {
-  margin: 0.6rem;
-  position: relative;
-  top: 10px;
-  left: 10px;
+  max-width: 600px;
+  width: 100%;
+  justify-self: center;
+  align-self: center;
+}
+
+.welcome-shift {
+  grid-area: welcome-article;
 }
 
 .call-to-action {
-  grid-area: call-to-action;
-  float: left;
+  width: 100%;
+  /*   float: left;
+ */
+}
+
+.welcome-container .call-to-action {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: left;
+  gap: 32px;
 }
 /* 1 section why adoption is important */
 .adoption-is-important {
@@ -128,37 +100,64 @@ hr {
 .help-article .article-image {
   grid-area: image;
 }
-/* 2 section video */
+/* Video styles start */
+
 .video {
-  display: flex;
-  justify-content: center;
-  align-content: center;
+  margin: 140px 0 70px 0;
+  width: 100%;
 }
+
+.video_wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.video_item {
+  padding-top: 56.25%;
+}
+
+.video_element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Video styles end */
 
 /* Responsive design start */
 
-@media screen and (max-width: 990px) {
-  .welcome-container {
+@media screen and (max-width: 1100px) {
+  .welcome,
+  .adoption-is-important,
+  .lonely-animals-need-help,
+  .video {
     display: block;
+    padding: 1.6rem;
+    justify-content: center;
+    align-content: center;
   }
-  .adoption-article {
-    display: block;
-  }
+
   .welcome-image-dog {
-    max-width: 100%;
+    max-width: 500px;
   }
   .header-navbar-wrapper {
     min-height: initial;
   }
 
-  .adoption-is-important {
-    display: block;
-  }
-
   .grid-image-article {
     display: initial;
   }
+
   .call-to-action {
+    margin-left: 20px;
+    display: flex;
     flex-direction: column;
+    height: 200px;
+    justify-content: flex-start;
+    /*     max-width: 0px;
+ */
   }
 }

@@ -2,10 +2,11 @@ import createProfileDropDownMenu from "./profile-dropdown-menu.js";
 import createLogoutMenu from "./logout-menu.js";
 import createLoginSignupMenu from "./login-signup-menu.js";
 import mainMenuComponent from "./main-menu-component.js";
+import responsiveMenuComponent from "./responsive-menu-component.js";
 import createLogo from "./logo.js";
 import burgerComponent from "./burger.js";
 
-export const navbar = () => {
+export const navbar = async () => {
   // Is the user logged in
   const isLoggedIn = localStorage.getItem("isLoggedIn");
 
@@ -24,15 +25,15 @@ export const navbar = () => {
 
   // Add additional login/logout/signup
   if (isLoggedIn) {
-    const logoutMenu = createLogoutMenu();
+    const logoutMenu = await createLogoutMenu();
     const profileDropDownMenu = createProfileDropDownMenu();
     logoutMenu.appendChild(profileDropDownMenu);
     navbarEl.appendChild(logoutMenu);
-    navbarEl.appendChild(burgerComponent());
   } else {
     const loginSignupMenu = createLoginSignupMenu();
     navbarEl.appendChild(loginSignupMenu);
-    navbarEl.appendChild(burgerComponent());
   }
+  navbarEl.appendChild(responsiveMenuComponent());
+  navbarEl.appendChild(burgerComponent());
   return navbarEl;
 };
